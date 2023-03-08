@@ -72,7 +72,7 @@
                         <div id="barras">
                         <?php
                         if($_SESSION['Perfil'] == "Administrador" || $_SESSION['Perfil'] == "Coordenador" ||  $_SESSION['Perfil'] == "Franqueado"){
-                            echo  " <a href='./contratos.php'>Contratos</a>
+                            echo  " <a href='./editaClausulas.php'>Contratos</a>
                             <a href='./pagamentos.php'>Pagamentos</a>
                             <a href='./aniversariantes.php'>Aniversariantes</a>
                             <a href='./historico.php'>Históricos</a>";
@@ -131,7 +131,7 @@
                         <div id="barras">
                         <?php
                         if($_SESSION['Perfil'] == "Administrador" || $_SESSION['Perfil'] == "Coordenador" ||  $_SESSION['Perfil'] == "Franqueado"){
-                            echo  " <a href='./contratos.php'>Contratos</a>
+                            echo  " <a href='./editaClausulas.php'>Contratos</a>
                             <a href='./pagamentos.php'>Pagamentos</a>
                             <a href='./aniversariantes.php'>Aniversariantes</a>
                             <a href='./historico.php'>Históricos</a>";
@@ -166,10 +166,14 @@
                     <div class="content">
                         <div id="dadosDoAluno" class="" style="padding:10px;">
                             <h3>Preencha os dados do Franqueado</h3>
-                            <form method="post" action="valida.php">
+                            <form method="post" enctype="multipart/form-data" action="valida.php">
                                 <input type="hidden" name="_token" value="WmrC6gcNsjkmzVGYVTc9EemXmdDXh5Zavb5ywoMY">
                                 <div class="row">
                                     <div class="form-group col-12 col-lg-6">
+                                         <label for="logo">Logo</label>
+                                        <input type="file" name="logo" accept="image/jpeg"/> 
+                                         </div>
+                                     <div class="form-group col-12 col-lg-6">
                                         <label for="nome">Nome</label>
                                         <input type="text" class="form-control" id="nome" name="nome" placeholder="" required>
                                     </div>

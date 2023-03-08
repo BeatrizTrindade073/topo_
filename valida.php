@@ -449,6 +449,7 @@ if(isset($_POST['enviareditarFranqueado'])){
 	header('Location: ./admin.php');
 }
 if(isset($_POST['cadastraFranqueado'])){
+    
 	$_POST['nome'] = clear($_POST['nome']);
 	$_POST['email'] = clear($_POST['email']);
 	$_POST['telefone'] = clear($_POST['telefone']);
@@ -494,10 +495,10 @@ if(isset($_POST['cadastraFranqueado'])){
 			exit;
 		}
 	}
-	$consulta = "INSERT INTO franqueados (Nome, CNPJ, Email, Perfil, Telefone, Rua, Numero, Bairro, Cidade, Estado, CEP, Login, Senha) VALUES  ('{$_POST['nome']}','{$_POST['cnpj']}', '{$_POST['email']}', 'Franqueado',
+	$consulta = "INSERT INTO franqueados (Nome, CNPJ, Email, Perfil, Telefone, Rua, Numero, Bairro, Cidade, Estado, CEP, Login, Senha, logo) VALUES  ('{$_POST['nome']}','{$_POST['cnpj']}', '{$_POST['email']}', 'Franqueado',
 	'{$_POST['telefone']}','{$_POST['rua']}','{$_POST['numero']}', 
 	'{$_POST['bairro']}','{$_POST['cidade']}','{$_POST['estado']}','{$_POST['cep']}'
-	,'{$_POST['login']}','{$_POST['senha']}')";
+	,'{$_POST['login']}','{$_POST['senha']}','{$_FILES['logo']['name']}')";
 	$sqledita = $mysqli->query($consulta) or die($mysqli->error);
 	header('Location: ./cadastraFranqueado.php');
 
@@ -554,10 +555,10 @@ if(isset($_POST['cadastraAluno2'])){
 			exit;
 		}
 	}
-	$consulta = "INSERT INTO alunos (Nome,Responsavel_2, Responsavel_numero, Nascimento, Email, Telefone, CPF, RG, CEP, Estado, Cidade, Rua, Numero, Complemento, Senha, Login, Status,  imagem) VALUES  ('{$_POST['nome']}','{$_POST['resp']}','{$_POST['respT']}', '{$_POST['nascimento']}', 
+	$consulta = "INSERT INTO alunos (Nome,Responsavel_2, Responsavel_numero, Nascimento, Email, Telefone, CPF, RG, CEP, Estado, Cidade, Rua, Numero, Complemento, Senha, Login, Status, imagem, CEP_Responsavel, DATA_Responsavel, RG_Responsavel, CPF_Responsavel) VALUES  ('{$_POST['nome']}','{$_POST['resp']}','{$_POST['respT']}', '{$_POST['nascimento']}', 
 	'{$_POST['email']}','{$_POST['telefone']}','{$_POST['cpf']}', '{$_POST['rg']}', 
 	'{$_POST['cep']}', '{$_POST['estado']}', '{$_POST['cidade']}','{$_POST['rua']}'
-	, '{$_POST['numero']}', '{$_POST['complemento']}', '{$_POST['senha']}' ,'{$_POST['login']}','1', 'oi')";
+	, '{$_POST['numero']}', '{$_POST['complemento']}', '{$_POST['senha']}' ,'{$_POST['login']}','1', 'oi', '{$_POST['CEPT']}','{$_POST['nascimentoT']}', '{$_POST['RGT']}', '{$_POST['CPFT']}')";
 	$sqledita = $mysqli->query($consulta) or die($mysqli->error);
 	$consultaCpf = "SELECT ID_Aluno from alunos WHERE Login = '{$_POST['login']}'";
 	$sqlcpf = $mysqli->query($consultaCpf) or die($mysqli->error);
@@ -595,6 +596,7 @@ if(isset($_POST['cadastraAluno2'])){
 				$sql2 = $mysqli->query($consulta2) or die($mysqli->error);
 		}
 	}
+
 	header('Location: ./contratoecarne.php?cpf='.$cpf.'');
 ?>
 

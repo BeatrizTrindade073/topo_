@@ -1,15 +1,5 @@
 <?php
-
-$cpf = $_GET['cpf'];
-
-?>
-  <script> var cpf = "<?php echo $cpf ?>"
-    
-    console.log(cpf);
-    
-    </script>
-<?php
- require __DIR__.'/vendor/autoload.php';
+        require __DIR__.'/vendor/autoload.php';
         use Dompdf\Dompdf;
         use Dompdf\Options;
         //Instanciação do objeto options
@@ -18,14 +8,14 @@ $cpf = $_GET['cpf'];
         $options->setChroot(__DIR__);
         $options->setIsRemoteEnabled(true);
         //Instanciação do objeto dompdf
+        $cpf = $_GET['cpf'];
         $dompdf = new Dompdf($options);
-        $host = "localhost";
-        $user = "root";
-        $pass = "bia999665";
-        $db = "podium";
+       $host = "localhost";
+$user = "root";
+$pass = "bia999665";
+$db = "podium";
         $mysqli = new mysqli($host, $user, $pass, $db);
-
-
+        
      $parcelas = 6;
      setlocale(LC_ALL,'pt_BR.UTF8');
       mb_internal_encoding('UTF8'); 
@@ -69,9 +59,7 @@ $cpf = $_GET['cpf'];
      $cnpj_franqueado=$cnomefranqueado['CNPJ'];
      $tel_franqueado=$cnomefranqueado['Telefone'];
     $end_franqueado = $cnomefranqueado['Rua']. " ".$cnomefranqueado['Numero']." ".$cnomefranqueado['Complemento']." - ".$cnomefranqueado['Bairro']." , ".$cnomefranqueado['Cidade']." - ".$cnomefranqueado['Estado'];
-     $clausulas = $cnomefranqueado['clausulas'];
-           
-           
+      $logo = $cnomefranqueado['logo'];           
       }
       
        while($cafiliado=mysqli_fetch_array($afiliado)){
@@ -86,8 +74,8 @@ $cpf = $_GET['cpf'];
       $nome_afiliado=$cnomeafiliado['Nome'];
       $cnpj_afiliado=$cnomeafiliado['CNPJ'];
      $tel_afiliado=$cnomeafiliado['Telefone'];
-    $end_afiliado = $cnomeafiliado['Rua']. " ".$cnomeafiliado['Numero']." ".$cnomeafiliado['Complemento']." - ".$cnomeafiliado['Bairro']." , ".$cnomeafiliado['Cidade']." - ".$cnomeafiliado['Estado'];
-           
+   $end_afiliado = $cnomeafiliado['Rua']. " ".$cnomeafiliado['Numero']." ".$cnomeafiliado['Complemento']." - ".$cnomeafiliaado['Bairro']." , ".$cnomeafiliado['Cidade']." - ".$cnomeafiliado['Estado'];
+     $clausulas = $cnomeafiliado['clausulas'];
            
       }
      
@@ -128,7 +116,7 @@ $cpf = $_GET['cpf'];
           {
               if($callcurso['ID_Curso']==$cid[$i])
               {
-                  $nomeCurso .=($callcurso['Nome_curso'] . " - " .$callcurso['Horas']. "</br> ");
+                  $nomeCurso .=($callcurso['Nome_curso'] . " </br> ");
                   $horaCurso .=($callcurso['Horas'] . " horas </br> ");
                   $cargahoraria+=($callcurso['Horas']);
                   $precototal+=number_format($callcurso['Preco'],2,",",".");
@@ -140,16 +128,7 @@ $cpf = $_GET['cpf'];
      $precopparcela = ($precototal)/($parcelas);   
       $precopparcela = number_format($precopparcela,2,",",".");
     
-    /* if(!empty($nome_afiliado))
-     {
-         $emp_nome = $nome_afiliado;
-         $emp_cnpj = $cnpj_afiliado;
-         $emp_tel = $tel_afiliado;
-         $emp_end = $end_afiliado;
-     }
-     */
-        
-       if(!empty($nome_franqueado))
+  if(!empty($nome_franqueado))
      {
          $emp_nome = $nome_franqueado;
          $emp_cnpj = $cnpj_franqueado;
@@ -157,7 +136,8 @@ $cpf = $_GET['cpf'];
          $emp_end = $end_franqueado;
      }
       
-      
+
+
       //Envio do valor do buffer para a a classe
         //$dompdf->loadHtmlFile(__DIR__.'/teste.php');
       if(!empty($nome_afiliado)){
@@ -230,10 +210,10 @@ $cpf = $_GET['cpf'];
         <p style="font-size:10px;margin-top:10px;">Valor Entrada:  R$0,00</p>
         <p style="font-size:10px;margin-top:10px;">Valor do Curso com Desconto: R$'.$precototal.',00</p>
         <p style="font-size:10px;margin-top:10px;">Valor do Curso sem Desconto: R$'.$precototal.',00 </p>
-       <p>_______________________________________________________________________________</p>
+         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;margin-top:20px;">Cursos Contratados: </p>
         <p style="font-size:10px;font-weight:bold;margin-top:10px;"> '.$nomeCurso.'</p>
-        </br>
+         </br>
         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;font-weight:bold;margin-top:20px;">Contratado: </p>
         <p style="font-size:10px;margin-top:10px;"> Razão Social: GUERRA & NASCIMENTO EMPREENDIMENTOS LTDA</p>
@@ -241,7 +221,7 @@ $cpf = $_GET['cpf'];
         <p style="font-size:10px;margin-top:10px;"> CNPJ: 04.880.821/0001-10</p>
         <p style="font-size:10px;margin-top:10px;"> Telefone: (32)3421-2299</p>
         <p style="font-size:10px;margin-top:10px;"> Endereço: Rua Tenente Fortunato - Centro, CATAGUASES/MG</p> 
-        <p>_______________________________________________________________________________</p>
+         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;font-weight:bold;margin-top:20px;">Contratante: </p>
         <p style="font-size:10px;;margin-top:10px;"> Nome: '.$nome.'</p>
         <p style="font-size:10px;margin-top:10px;"> Endereço: '.$end.'</p>
@@ -250,26 +230,19 @@ $cpf = $_GET['cpf'];
         <p style="font-size:10px;margin-top:10px;"> Data de Nascimento: '.$nasc.'</p>
         <p style="font-size:10px;margin-top:10px;"> RG: '.$rg.'</p>
         <p style="font-size:10px;margin-top:10px;"> CPF: '.$cpf.'</p>
-        <p>_______________________________________________________________________________</p>
+         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;font-weight:bold;margin-top:20px;">Representante Legal: </p>
         <p style="font-size:10px;margin-top:10px;"> Nome: '.$resp.'</p>
         <p style="font-size:10px;margin-top:10px;"> Endereço: '.$end.'</p>
-        <p style="font-size:10px;margin-top:10px;"> CEP: '.$cep.'</p>
+           <p style="font-size:10px;margin-top:10px;"> CEP: '.$respcep.'</p>
         <p style="font-size:10px;margin-top:10px;"> Telefone: '.$resptel.'</p>
-        <p style="font-size:10px;margin-top:10px;"> Data de Nascimento: '.$respnasc.' </p>
+         <p style="font-size:10px;margin-top:10px;"> Data de Nascimento: '.$respnasc.'</p>
         <p style="font-size:10px;margin-top:10px;"> RG: '.$resprg.'</p>
         <p style="font-size:10px;margin-top:10px;"> CPF: '.$respcpf.'</p>
         </div>
         <div class="direito">
-        <p style="font-size:10px;margin-left:1%;margin-top:20px;">Código do Aluno: '.$id_Aluno.' </p>
-        <p style="font-size:10px;margin-left:1%;margin-top:10px;">Desconto: 0% </p>
-        <p style="font-size:10px;margin-left:1%;margin-top:10px;">1º Vencimento: '.$data_limite.' </p>
-        <p style="font-size:10px;margin-left:1%;margin-top:10px;"> Carga Horária: '.$cargahoraria.' </p>
-        <p style="font-size:10px;margin-left:1%;margin-top:10px;">Valor da Parcela com Desconto: R$'.$precopparcela.'</p>
-        <p style="font-size:10px;margin-left:1%;margin-top:10px;">Valor da Parcela sem Desconto: R$'.$precopparcela.' </p>
-        </br>
-        <p style="font-size:10px;margin-left:1%;margin-top:20px;"> Horário: </p>
-        <p style="font-size:10px;font-weight:bold;margin-left:1%;margin-top:10px;"> '.$dia.' </p>
+        
+       
         </div>
         
         </div>
@@ -301,7 +274,6 @@ $cpf = $_GET['cpf'];
         </div>
         <div class="rodape">
         </br>
-        
         <center>
         <p style="font-size:10px;font-weight:bold;margin-top:10px;">'.$cidade.', '.$data.'</p>
         </center>
@@ -315,7 +287,7 @@ $cpf = $_GET['cpf'];
         </center>
         
         </div>
-         <div class="littledireito">
+          <div class="littledireito">
          </br>
          </br>
            <center>
@@ -367,18 +339,15 @@ $cpf = $_GET['cpf'];
             page-break-before: always; 
             }
             
-            #clausulas{
-            
-            }
             .esquerdo{
             float:left;
             width:300px;
             display: block;
             }
             
-            .littleesquerdo{
-            float:left;
-            width:400px;
+            .littledireito{
+            float:right;
+            width:300px;
             display: block;
             }
             
@@ -389,18 +358,18 @@ $cpf = $_GET['cpf'];
             position: fixed;
             }
             
-            .littledireito{
-            float:right;
-            width:300px;
+            .littleesquerdo{
+            float:left;
+            width:400px;
             display: block;
             }
             </style>
         </head>
         <body>
         <div class="info">
-        <p style="font-size:13px;font-weight:bold;margin-left:60%;margin-top:30px;">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</p>
+        <img src="data:image/jpeg;base64,'.base64_encode($logo).'"/>
+        <p style="font-size:13px;font-weight:bold;margin-left:54%;margin-top:30px;">CONTRATO DE PRESTAÇÃO DE SERVIÇOS</p>
         <p>_______________________________________________________________________________</p>
-    
         <div class="esquerdo">
         <p style="font-size:10px;margin-top:20px;">Nº do Contrato: - </p>
         <p style="font-size:10px;margin-top:10px;">Convênio:  - </p>
@@ -411,6 +380,9 @@ $cpf = $_GET['cpf'];
         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;margin-top:20px;">Cursos Contratados: </p>
         <p style="font-size:10px;font-weight:bold;margin-top:10px;"> '.$nomeCurso.'</p>
+        <p>_______________________________________________________________________________</p>
+        <p style="font-size:10px;margin-top:20px;">Horários: </p>
+        <p style="font-size:10px;font-weight:bold;margin-top:10px;"> '.$dia.' </p>
         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;font-weight:bold;margin-top:20px;">Contratado: </p>
         <p style="font-size:10px;margin-top:10px;"> Razão Social:</p>
@@ -430,6 +402,7 @@ $cpf = $_GET['cpf'];
         <p>_______________________________________________________________________________</p>
         <p style="font-size:10px;font-weight:bold;margin-top:20px;">Representante Legal: </p>
         <p style="font-size:10px;margin-top:10px;"> Nome: '.$resp.'</p>
+        <p style="font-size:10px;margin-top:10px;"> Endereço: '.$end.'</p>
         <p style="font-size:10px;margin-top:10px;"> CEP: '.$respcep.'</p>
         <p style="font-size:10px;margin-top:10px;"> Telefone: '.$resptel.'</p>
         <p style="font-size:10px;margin-top:10px;"> Data de Nascimento: '.$respnasc.'</p>
@@ -444,8 +417,7 @@ $cpf = $_GET['cpf'];
         <p style="font-size:10px;margin-left:1%;margin-top:10px;">Valor da Parcela com Desconto: R$'.$precopparcela.'</p>
         <p style="font-size:10px;margin-left:1%;margin-top:10px;">Valor da Parcela sem Desconto: R$'.$precopparcela.' </p>
         </br>
-        <p style="font-size:10px;margin-left:1%;margin-top:20px;"> Horário: </p>
-        <p style="font-size:10px;font-weight:bold;margin-left:1%;margin-top:10px;">'.$dia.' </p>
+           
         </div>
         
         </div>
@@ -453,7 +425,7 @@ $cpf = $_GET['cpf'];
         <div class="texto">
         </br>
         </br>
-        <p style="font-size:10px;margin-right:0%;margin-top:10px;"> '.$clausulas.'</p>
+         <p style="font-size:10px;margin-right:0%;margin-top:10px;"> '.$clausulas.'</p>
         </div>
         <div class="rodape">
         </br>
@@ -470,7 +442,7 @@ $cpf = $_GET['cpf'];
         </center>
         
         </div>
-         <div class="littledireito">
+        <div class="littledireito">
          </br>
          </br>
            <center>
@@ -497,6 +469,6 @@ $cpf = $_GET['cpf'];
         //Imprime o conteudo do pdf na tela
         header('Content-type: application/pdf');
         echo $dompdf->output();
-//a    
-?>
+    
+    ?>
 
