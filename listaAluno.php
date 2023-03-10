@@ -79,7 +79,7 @@
                         <div id="barras">
                         <?php
                         if($_SESSION['Perfil'] == "Administrador" || $_SESSION['Perfil'] == "Coordenador" ||  $_SESSION['Perfil'] == "Franqueado"){
-                            echo  " <a href='./contratos.php'>Contratos</a>
+                            echo  " <a href='./editaClausulas.php'>Contratos</a>
                             <a href='./pagamentos.php'>Pagamentos</a>
                             <a href='./aniversariantes.php'>Aniversariantes</a>
                             <a href='./historico.php'>Históricos</a>";
@@ -138,7 +138,7 @@
                         <div id="barras">
                         <?php
                         if($_SESSION['Perfil'] == "Administrador" || $_SESSION['Perfil'] == "Coordenador" ||  $_SESSION['Perfil'] == "Franqueado"){
-                            echo  " <a href='./contratos.php'>Contratos</a>
+                            echo  " <a href='./editaClausulas.php'>Contratos</a>
                             <a href='./pagamentos.php'>Pagamentos</a>
                             <a href='./aniversariantes.php'>Aniversariantes</a>
                             <a href='./historico.php'>Históricos</a>";
@@ -223,6 +223,7 @@
                     </select>
                     <input type="submit" class="btn btn-success btn-sm" style="background-color:blue;margin-top:10px;font-size:15px; vertical-align:baseline" name="buscaAluno" value='Buscar'></input>
                     <a href="./admin.php" class="btn btn-success btn-sm" style="background-color:blue;margin:0px;font-size:15px">Voltar</a>
+                    <a href="./impalunos.php" class="btn btn-success btn-sm" style="background-color:blue;margin:0px;font-size:15px">Imprimir Alunos</a>
                     </form>
                     <br>
                 </div>

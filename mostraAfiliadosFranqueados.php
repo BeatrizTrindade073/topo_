@@ -178,6 +178,7 @@
                     </select>
                     <input type="submit" class="btn btn-primary btn-sm" style="background-color:blue;margin-top:10px;vertical-align:baseline;font-size:14px;" name="buscaAF" value="Buscar"></input>
                     <a href="./admin.php" class="btn btn-primary btn-sm" style="background-color:blue;vertical-align:baseline;margin:0px;font-size:14px;">Voltar</a>
+                    <a href="./impfranqueadoseafiliados.php" class="btn btn-success btn-sm" style="background-color:blue;margin:0px;font-size:15px">Imprimir Alunos</a>
                 </form>
 
                 </div>
