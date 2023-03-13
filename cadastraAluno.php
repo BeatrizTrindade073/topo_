@@ -1,4 +1,4 @@
-﻿<?php 
+﻿﻿<?php 
     include("validabia.php");
     $consultaAlunos = "SELECT * from alunos";
     $consultaColab = "SELECT * from colaboradores";
@@ -34,6 +34,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="js/constroi.js"> </script>
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body id="adminBody">
 <nav class="menuAdmin">
@@ -178,8 +179,24 @@
                                         <input type="text" class="form-control" id="resp" name="resp" placeholder="" >
                                     </div>
                                     <div class="form-group col-12 col-lg-6">
-                                        <label for="nome">Responsável Telefone</label>
+                                        <label for="nome">Telefone do Responsável </label>
                                         <input type="text" class="form-control" id="respT" name="respT" placeholder="" >
+                                    </div>
+                                    <div class="form-group col-12 col-lg-6">
+                                        <label for="nome">CPF do Responsável </label>
+                                        <input type="text" class="form-control" id="cpfT" name="CPFT" placeholder="" >
+                                    </div>
+                                     <div class="form-group col-12 col-lg-6">
+                                        <label for="nome">RG do Responsável </label>
+                                        <input type="text" class="form-control" id="rgT" name="RGT" placeholder="" >
+                                    </div>
+                                     <div class="form-group col-12 col-lg-6">
+                                        <label for="nasc">Data de Nasc. do Responsável</label>
+                                        <input type="date" class="form-control" id="nascimento" name="nascimentoT" placeholder="">
+                                    </div>
+                                     <div class="form-group col-12 col-lg-6">
+                                        <label for="nasc">CEP do Responsável</label>
+                                        <input type="text" class="form-control" id="nascimento" name="CEPT" placeholder="">
                                     </div>
                                     <div class="form-group col-12 col-lg-6">
                                         <label for="nasc">Data de Nasc.</label>
@@ -238,13 +255,33 @@
                                         <?php 
                                             $contcurso= 0;
                                              while($cCursos = mysqli_fetch_array($conCursos)){
-                                                echo "<input type='checkbox' name='curso".$contcurso."' value='".$cCursos['ID_Curso']."'>".$cCursos['Nome_curso']."</input><br>";
-                                                echo "<input name='valorcurso".$contcurso."' value='".$cCursos['Preco']."' style='display:none'/>";
+                                                echo "<input type='checkbox' class='teste' name='curso".$contcurso."' value='".$cCursos['Preco']."'>".$cCursos['Nome_curso']." - Preço: R$".$cCursos['Preco']."</input><br>";
                                                 $contcurso++;
-                                            }
+                                            }?>
+                                            
+                                        <script>
+                                           jQuery(function() {
+                                                 $(document).ready(function() {
+                                                      $(".teste").change(function() {
+                                                            var total = $('input[class="teste"]:checked').get().reduce(function(tot, el) {
+                                                            return tot + Number(el.value);
+                                                                                    }, 0);
+                                                        $('#resultado').val(total);
+                                                                 });
+                                                            });
+                                                        });
+                                        </script>
+                                        <?php
                                             $contcurso--;
-                                            echo "<input name='contcurso' value='".$contcurso."' style='display:none'/>"
+                                            echo "<input name='contcurso' value='".$contcurso."' style='display:none'/>";
+                                             echo "</br>";
+                                                 echo "Valor da Matrícula <input style='width:50px;text-align:center;' type='number' id='matricula' name='matricula' value='50' /> </br></br>";
+                                                  echo "Valor do Material Didático <input style='width:50px;text-align:center;' type='number' id='material' name='material' value='50' /> </br></br>";
+                                         echo "Nº de Parcelas <input style='width:50px;text-align:center;' type='number' id='parcelas' name='parcelas' value='3' /> </br></br>";
+                                         echo "Desconto <input style='width:50px;text-align:center;' type='number' id='desconto' name='desconto' value='50' /> </br></br>";
+                                         echo "Mensagem <input style='width:500px;height:50px;text-align:center;'type='text' id='mensagem' name='mensagem' value='Caso pagamento até o dia 12, desconto de 10%.' /> </br></br>";
                                         ?>
+                                      Total <input type="text" id="resultado" value="0"/>
                                         </select>
                                     </div>
                                     <div class="form-group col-12 col-lg-6">
