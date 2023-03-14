@@ -262,12 +262,28 @@
                                         <script>
                                            jQuery(function() {
                                                  $(document).ready(function() {
-                                                      $(".teste").change(function() {
+                                                      $('input').change(function() {
                                                             var total = $('input[class="teste"]:checked').get().reduce(function(tot, el) {
                                                             return tot + Number(el.value);
                                                                                     }, 0);
-                                                        $('#resultado').val(total);
+                                                            var input1 = document.querySelector("#matricula");
+                                                            var matricula = input1.value;
+                                                            var input2 = document.querySelector("#material");
+                                                            var material = input2.value;
+                                                            var input3 = document.querySelector("#parcelas");
+                                                            var parcelas = input3.value;
+                                                            var input4 = document.querySelector("#desconto");
+                                                            var desconto = input4.value;
+                                                    
+                                                          var soma = parseFloat(total)+parseFloat(matricula)+parseFloat(material);
+                                                          var descontando = (parseFloat(soma))*(parseInt(desconto)/100);
+                                                        var comdesconto = parseFloat(soma) - parseFloat(descontando);
+                                                        $('#resultado').val(parseFloat(soma));
+                                                         $('#comdesconto').val(parseFloat(comdesconto));
+                                                           $('#porparcela').val((parseFloat(resultado))/(parseInt(parcelas)));
                                                                  });
+                
+                                                    
                                                             });
                                                         });
                                         </script>
@@ -275,13 +291,19 @@
                                             $contcurso--;
                                             echo "<input name='contcurso' value='".$contcurso."' style='display:none'/>";
                                              echo "</br>";
-                                                 echo "Valor da Matrícula <input style='width:50px;text-align:center;' type='number' id='matricula' name='matricula' value='50' /> </br></br>";
-                                                  echo "Valor do Material Didático <input style='width:50px;text-align:center;' type='number' id='material' name='material' value='50' /> </br></br>";
-                                         echo "Nº de Parcelas <input style='width:50px;text-align:center;' type='number' id='parcelas' name='parcelas' value='3' /> </br></br>";
-                                         echo "Desconto <input style='width:50px;text-align:center;' type='number' id='desconto' name='desconto' value='50' /> </br></br>";
+                                               echo "Valor da Matrícula(R$) <input style='width:60px;text-align:center;' type='number' id='matricula' name='matricula' value='0.0' /> </br></br>";
+                                                  echo "Valor do Material Didático(R$) <input style='width:60px;text-align:center;' type='number' id='material' name='material' value='0.0' /> </br></br>";
+                                         echo "Nº de Parcelas <input style='width:60px;text-align:center;' type='number' id='parcelas' name='parcelas' value='0' /> </br></br>";
+                                         echo "Desconto(%) <input style='width:60px;text-align:center;' type='number' id='desconto' name='desconto' value='0' /> </br></br>";
                                          echo "Mensagem <input style='width:500px;height:50px;text-align:center;'type='text' id='mensagem' name='mensagem' value='Caso pagamento até o dia 12, desconto de 10%.' /> </br></br>";
                                         ?>
-                                      Total <input type="text" id="resultado" value="0"/>
+                                   Total (R$)<input type="number" name="total" style='width:60px;text-align:center;' id="resultado" value="0.0"/>
+                                      </br>
+                                      </br>
+                                      Após desconto(R$) <input type="number" name="valor_com_desconto" style='width:60px;text-align:center;' id="comdesconto" value="0.0"/>
+                                      </br>
+                                      </br>
+                                      Valor p/ Parcela (R$) <input type="number" name"parcelado" style='width:60px;text-align:center;' id="porparcela" value="0.0"/>
                                         </select>
                                     </div>
                                     <div class="form-group col-12 col-lg-6">
