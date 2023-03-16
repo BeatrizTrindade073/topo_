@@ -125,6 +125,7 @@
                             echo  "
                             <a href='./mostraCurso.php'>Curso</a>";
                         }
+                        //a
                     ?>
                     </div>
             </li>
